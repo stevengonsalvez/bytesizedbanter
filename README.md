@@ -1,2 +1,2 @@
 # bytesizedbanter
-blog publish
+blog synch to hashnode
