@@ -1,5 +1,5 @@
 ---
-title: My first post using Github as source
+title: SLA calculation
 subtitle: An example subtitle
 slug: post-from-github-as-source
 tags: reactjs, css, python, nodejs
