@@ -2,7 +2,7 @@
 title: Password Manage your environment and secrets with bitwarden
 published: true
 description: Manage your secrets and local environment with bitwarden password manager
-tags: 'bitwarden, enviroment, passwordmanager, dotenv'
+tags: 'Productivity, terminal, cli'
 cover_image: 'https://user-images.githubusercontent.com/9320602/180967423-6ca1e032-866d-4b61-9eac-7331886068c7.png'
 canonical_url: null
 domain: blog.stevengonsalvez.com
