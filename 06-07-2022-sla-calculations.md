@@ -6,7 +6,7 @@ tags: Azure
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1675467022591/Ru3AUoPtc.png?auto=compress
 canonical_url: null
 domain: blog.stevengonsalvez.com
-
+ignorePost: true
 ---
 
 # Calculating the composite availability SLA for your stack 
