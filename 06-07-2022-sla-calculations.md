@@ -3,9 +3,10 @@ title: Availability Service Level Calculation
 published: true
 description: Calculating the composite availability SLA for your stack
 tags: Azure
-cover: 'https://user-images.githubusercontent.com/9320602/177644504-b9502adc-b4d4-4a43-bd91-ed367e71a26c.png'
+cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1675467022591/Ru3AUoPtc.png?auto=compress
 canonical_url: null
 domain: blog.stevengonsalvez.com
+
 ---
 
 # Calculating the composite availability SLA for your stack 

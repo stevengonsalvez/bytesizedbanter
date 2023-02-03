@@ -2,7 +2,7 @@
 title: Github OIDC with terraform and Azure
 published: true
 description: Securing GitHub Actions with OIDC to create continuous infrastructure on Azure
-tags: 'azure, github, terraform, tutorial'
+tags: azure, github, terraform, tutorial
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1675467022591/Ru3AUoPtc.png?auto=compress
 canonical_url: null
 domain: blog.stevengonsalvez.com

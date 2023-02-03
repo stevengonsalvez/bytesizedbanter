@@ -2,7 +2,7 @@
 title: Password Manage your environment and secrets with bitwarden
 published: true
 description: Manage your secrets and local environment with bitwarden password manager
-tags: 'Productivity, terminal, cli'
+tags: Productivity, terminal, cli
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1675466685992/aTKx6f7pV.png?auto=compress
 canonical_url: null
 domain: blog.stevengonsalvez.com
