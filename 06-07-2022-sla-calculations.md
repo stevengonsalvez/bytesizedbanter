@@ -1,12 +1,10 @@
 ---
-title: Availability Service Level Calculation
-published: true
-description: Calculating the composite availability SLA for your stack
-tags: Azure
-cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1675467022591/Ru3AUoPtc.png?auto=compress
-canonical_url: null
-domain: blog.stevengonsalvez.com
-ignorePost: true
+title: My first post using Github as source
+subtitle: An example subtitle
+slug: post-from-github-as-source
+tags: reactjs, css, python, nodejs
+cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1649662225945/7f_c6UxhR.jpg?auto=compress
+domain: CHANGE_THIS_TO_YOUR_DOMAIN
 ---
 
 # Calculating the composite availability SLA for your stack 
