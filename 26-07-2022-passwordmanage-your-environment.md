@@ -1,6 +1,6 @@
 ---
 title: Password Manage your environment and secrets with bitwarden
-ignorePost: true
+ignorePost: false
 description: Manage your secrets and local environment with bitwarden password manager
 tags: Productivity, terminal, cli
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1675466685992/aTKx6f7pV.png?auto=compress
