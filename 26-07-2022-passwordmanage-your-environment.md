@@ -48,6 +48,7 @@ Create the following aliases and functions in your shell configuration (~/.zshrc
 
 - unlock
   - On executing the `bw unlock`, the output will be as below
+  
      ```
      Your vault is now unlocked!
 
@@ -63,6 +64,7 @@ Create the following aliases and functions in your shell configuration (~/.zshrc
          eval $(bw unlock | grep export | awk -F"\$" {'print $2'})
      }
     ```
+    
 - Other command aliases.
   
 
@@ -73,6 +75,8 @@ Create the following aliases and functions in your shell configuration (~/.zshrc
 - Other helper functions
   
   - Function to set environment variables on the current session from a secure note of secret key/value pairs
+
+
    ```
    bwe(){
     eval $(bw get item $1 | jq -r '.notes')
@@ -80,6 +84,8 @@ Create the following aliases and functions in your shell configuration (~/.zshrc
    ```
   
   - Function to create a new vault item out of existing dotenv files on your local: `bwc "name_of_vault_key"`
+
+
    ```
    bwc(){
      DEFAULT_FF=".env"
@@ -107,6 +113,7 @@ Will use an example of managing azure apikeys/secrets/ for your local developmen
 
 So if you have a dotenv file as an example below
 
+
 ```
 APIKEY=something
 SECRET=something
@@ -115,9 +122,12 @@ environment=dev
 region=eu-north
 ```
 
+
 - To import this into the vault. At the location of the dotenv file, execute 
     - `bwss` and enter your password, this will setup the session on your terminal instance and
     - `bwc "az-example-dev"` to create the vault item. (Suggestion: use a prefix-item-env style naming convention for easy listing and setting.). This will create a new vault item with a secure note containing
+
+
        ```
        export APIKEY=something
        export SECRET=something
@@ -140,14 +150,18 @@ region=eu-north
       "az-wee-dev"
       "az-test-dev"
       ```
+      
       And then you could execute `bwe` to set whichever setup you need.
 
 - Deleting stale items : `bwdd "item-name"`
 
-    ```
+
+    ```bash
+    
       bwdd(){
 	      bw delete item $(bw get item $1 | jq .id | tr -d '"')
       }
+      
     ```
 
 How you organise your keys/secrets is up to you, but using a password manager will ensure 
