@@ -1,6 +1,6 @@
 ---
 title: Password Manage your environment and secrets with bitwarden
-published: true
+published: false
 description: Manage your secrets and local environment with bitwarden password manager
 tags: Productivity, terminal, cli
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1675466685992/aTKx6f7pV.png?auto=compress
@@ -40,6 +40,7 @@ Instead of utilising 2FA, you might enable biometrics on your workstation or ove
 Once these steps are done, then you could execute any `bw` command within that session to access your vault. 
 
 
+
 ### Simplification
 
 To simplify the above steps, will be using your shell startup configuration of the terminal to offload these steps e.g: ~/.zshrc or ~/.bash_profile or whatever is your preferred. The setup will execute and prompt for the password on the terminal when it is required (for setting session or unlocking).
@@ -48,22 +49,23 @@ Create the following aliases and functions in your shell configuration (~/.zshrc
 
 - unlock
   - On executing the `bw unlock`, the output will be as below
-  
-```
-Your vault is now unlocked!
 
-To unlock your vault, set your session key to the `BW_SESSION` environment variable. ex:
-$ export BW_SESSION="..REDACTED"
-$env:BW_SESSION="..REDACTED"
-```       
+  ```bash
+    Your vault is now unlocked!
+
+    To unlock your vault, set your session key to the `BW_SESSION` environment variable. ex:
+    $ export BW_SESSION="..REDACTED"
+    $env:BW_SESSION="..REDACTED"
+
+  ```     
     
    - Create the following function in the startup configuration, which will export that environment variable and set the session.
 
-```
- bwss() {
-     eval $(bw unlock | grep export | awk -F"\$" {'print $2'})
- }
-```
+  ```bash
+    bwss() {
+      eval $(bw unlock | grep export | awk -F"\$" {'print $2'})
+    }
+  ```
     
 - Other command aliases.
   
@@ -77,7 +79,7 @@ $env:BW_SESSION="..REDACTED"
   - Function to set environment variables on the current session from a secure note of secret key/value pairs
 
 
- ```
+ ```bash
  bwe(){
   eval $(bw get item $1 | jq -r '.notes')
  }
@@ -86,7 +88,7 @@ $env:BW_SESSION="..REDACTED"
   - Function to create a new vault item out of existing dotenv files on your local: `bwc "name_of_vault_key"`
 
 
- ```
+ ```bash
  bwc(){
    DEFAULT_FF=".env"
    FF=${2:-$DEFAULT_FF}
@@ -99,7 +101,7 @@ $env:BW_SESSION="..REDACTED"
 
   - Function to create a new vault item out of the entire terminal session environment: `bwce "name_of_vault_key"`
     
-```
+```bash
 bwce(){
   export | awk '{print "export " $0}' >/tmp/.env
   bw get template item | jq --arg a "$(cat /tmp/.env)" --arg b "$1" '.type = 2 | .secureNote.type = 0 | .notes = $a | .name = $b' | bw  encode | bw create item
@@ -114,12 +116,12 @@ Will use an example of managing azure apikeys/secrets/ for your local developmen
 So if you have a dotenv file as an example below
 
 
-```
-APIKEY=something
-SECRET=something
-configuration=host.com
-environment=dev
-region=eu-north
+```bash
+  "APIKEY=something"
+  "SECRET=something"
+  "configuration=host.com"
+  "environment=dev"
+  "region=eu-north"
 ```
 
 
@@ -128,7 +130,7 @@ region=eu-north
     - `bwc "az-example-dev"` to create the vault item. (Suggestion: use a prefix-item-env style naming convention for easy listing and setting.). This will create a new vault item with a secure note containing
 
 
-```
+```bash
 export APIKEY=something
 export SECRET=something
 export configuration=host.com
@@ -143,13 +145,12 @@ export region=eu-north
 - To list and set
     - `bwll "az-"` to list all your azure vault items. e.g:
       
-```
+```bash
 "az-example-dev"
 "az-example-stage"
 "az-foo-dev"
 "az-wee-dev"
 "az-test-dev"
-
 ```
       
    - And then you could execute `bwe` to set whichever setup you need.
@@ -157,7 +158,7 @@ export region=eu-north
 - Deleting stale items : `bwdd "item-name"`
 
 
-```
+```bash
   bwdd(){
       bw delete item $(bw get item $1 | jq .id | tr -d '"')
   }
