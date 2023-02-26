@@ -49,21 +49,21 @@ Create the following aliases and functions in your shell configuration (~/.zshrc
 - unlock
   - On executing the `bw unlock`, the output will be as below
   
-     ```
-     Your vault is now unlocked!
+```
+Your vault is now unlocked!
 
-     To unlock your vault, set your session key to the `BW_SESSION` environment variable. ex:
-     $ export BW_SESSION="..REDACTED"
-     $env:BW_SESSION="..REDACTED"
-     ```       
+To unlock your vault, set your session key to the `BW_SESSION` environment variable. ex:
+$ export BW_SESSION="..REDACTED"
+$env:BW_SESSION="..REDACTED"
+```       
     
-    Create the following function in the startup configuration, which will export that environment variable and set the session.
+   - Create the following function in the startup configuration, which will export that environment variable and set the session.
 
-     ```
-     bwss() {
-         eval $(bw unlock | grep export | awk -F"\$" {'print $2'})
-     }
-    ```
+```
+ bwss() {
+     eval $(bw unlock | grep export | awk -F"\$" {'print $2'})
+ }
+```
     
 - Other command aliases.
   
@@ -77,35 +77,35 @@ Create the following aliases and functions in your shell configuration (~/.zshrc
   - Function to set environment variables on the current session from a secure note of secret key/value pairs
 
 
-   ```
-   bwe(){
-    eval $(bw get item $1 | jq -r '.notes')
-   }
-   ```
+ ```
+ bwe(){
+  eval $(bw get item $1 | jq -r '.notes')
+ }
+ ```
   
   - Function to create a new vault item out of existing dotenv files on your local: `bwc "name_of_vault_key"`
 
 
-   ```
-   bwc(){
-     DEFAULT_FF=".env"
-     FF=${2:-$DEFAULT_FF}
-     #cat ${FF} | awk '{printf "%s\\n", $0}' |  sed 's/"/\\"/g' >/tmp/.env
-     cat ${FF} | awk '{print "export " $0}' >/tmp/.xenv
-     bw get template item | jq --arg a "$(cat /tmp/.xenv)" --arg b "$1" '.type = 2 | .secureNote.type = 0 | .notes = $a | .name = $b' |      bw encode | bw create item
-     rm /tmp/.xenv
-   }
-   ```
+ ```
+ bwc(){
+   DEFAULT_FF=".env"
+   FF=${2:-$DEFAULT_FF}
+   #cat ${FF} | awk '{printf "%s\\n", $0}' |  sed 's/"/\\"/g' >/tmp/.env
+   cat ${FF} | awk '{print "export " $0}' >/tmp/.xenv
+   bw get template item | jq --arg a "$(cat /tmp/.xenv)" --arg b "$1" '.type = 2 | .secureNote.type = 0 | .notes = $a | .name = $b' |      bw encode | bw create item
+   rm /tmp/.xenv
+ }
+ ```
 
   - Function to create a new vault item out of the entire terminal session environment: `bwce "name_of_vault_key"`
     
-    ```
-    bwce(){
-      export | awk '{print "export " $0}' >/tmp/.env
-      bw get template item | jq --arg a "$(cat /tmp/.env)" --arg b "$1" '.type = 2 | .secureNote.type = 0 | .notes = $a | .name = $b' | bw  encode | bw create item
-      rm /tmp/.env
-    }
-    ```
+```
+bwce(){
+  export | awk '{print "export " $0}' >/tmp/.env
+  bw get template item | jq --arg a "$(cat /tmp/.env)" --arg b "$1" '.type = 2 | .secureNote.type = 0 | .notes = $a | .name = $b' | bw  encode | bw create item
+  rm /tmp/.env
+}
+```
    
 ### Using the functions and aliases.
 
@@ -128,13 +128,13 @@ region=eu-north
     - `bwc "az-example-dev"` to create the vault item. (Suggestion: use a prefix-item-env style naming convention for easy listing and setting.). This will create a new vault item with a secure note containing
 
 
-       ```
-       export APIKEY=something
-       export SECRET=something
-       export configuration=host.com
-       export environment=dev
-       export region=eu-north
-       ```
+```
+export APIKEY=something
+export SECRET=something
+export configuration=host.com
+export environment=dev
+export region=eu-north
+```
 
 - To use it (in a later session)
     - `bwss` and enter your password, this will setup the session on your terminal instance and
@@ -143,26 +143,25 @@ region=eu-north
 - To list and set
     - `bwll "az-"` to list all your azure vault items. e.g:
       
-      ```
-      "az-example-dev"
-      "az-example-stage"
-      "az-foo-dev"
-      "az-wee-dev"
-      "az-test-dev"
-      ```
+```
+"az-example-dev"
+"az-example-stage"
+"az-foo-dev"
+"az-wee-dev"
+"az-test-dev"
+
+```
       
-      And then you could execute `bwe` to set whichever setup you need.
+   - And then you could execute `bwe` to set whichever setup you need.
 
 - Deleting stale items : `bwdd "item-name"`
 
 
-    ```bash
-    
-      bwdd(){
-	      bw delete item $(bw get item $1 | jq .id | tr -d '"')
-      }
-      
-    ```
+```
+  bwdd(){
+      bw delete item $(bw get item $1 | jq .id | tr -d '"')
+  }
+```
 
 How you organise your keys/secrets is up to you, but using a password manager will ensure 
 - All secrets are safe in the vault, and there is no file sprawl.
